@@ -1,7 +1,7 @@
 # *************************************************************************
 #
-# Copyright © Microsoft Corporation. All rights reserved.
-# Copyright © Broadcom Inc. All rights reserved.
+# Copyright ï¿½ Microsoft Corporation. All rights reserved.
+# Copyright ï¿½ Broadcom Inc. All rights reserved.
 # Licensed under the MIT License.
 #
 # *************************************************************************
@@ -40,7 +40,7 @@ build_simv: zipline.vlist
 
 run_simv:
 ifeq ($(shell test -e simv && echo -n yes),yes)
-	simv -assert nopostproc $(ENV_PLUSARGS) +TESTNAME=${TESTNAME} +SEED=${SEED} | tee $(SEED).${TESTNAME}_sv.log 
+	./simv -assert nopostproc $(ENV_PLUSARGS) +FILEPATH=${FILEPATH} +SEED=${SEED} +INPUT_LENGTH=${INPUT_LENGTH} +INPUT_START_POS=${INPUT_START_POS} | tee $(SEED).${TESTNAME}_sv.log 
 else
 	echo !!!WARNING!!!  Must build simv first
 endif
