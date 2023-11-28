@@ -1,1 +1,1 @@
-make run_simv TESTNAME=xp10 FILEPATH=/home/gaoruihao/zstd-speedtest/corpus/silesia.tar INPUT_LENGTH=4096 INPUT_START_POS=0
+make run_simv TESTNAME=xp10 FILEPATH=/home/gaoruihao/zstd-speedtest/corpus/silesia.tar INPUT_LENGTH=4096 INPUT_START_POS=0 VERDI_WAVES=1 

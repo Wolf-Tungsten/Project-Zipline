@@ -278,6 +278,7 @@ module zipline_tb;
         end
         read_count = $fseek(file_descriptor, input_start_pos, 0);
 
+        p = 0;
         ib_tlast <= 1'b0;
         // feed head into engine
         while(p < 7) begin
