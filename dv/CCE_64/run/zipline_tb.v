@@ -308,16 +308,17 @@ module zipline_tb;
                 if(read_count > 0) begin
                     ib_tvalid <= 1'b1;
                     ib_tdata <= tdata;
-                    ib_tstrb <= (9'b1 << read_count) - 1;
+                    
                     if(remaining_length <= 8) begin
                         ib_tuser <= translate_tuser("EoT");
-                        $display("EoT");
+                        ib_tstrb <= (9'b1 << remaining_length) - 1;
+                        $display("Input data EoT");
                     end
                     else begin
+                        ib_tstrb <= 8'hff;
                         ib_tuser <= 8'h00;
                     end
                     remaining_length -= read_count;
-                    $display("remaining_length=%d", remaining_length);
                 end else begin
                     $fatal(2, "Requested input file length out of boundary");
                 end
@@ -374,7 +375,6 @@ module zipline_tb;
         $display("start service ob interface");
         while( !saw_data_eot ) begin
             if(ob_tvalid) begin
-                $display("outdata = 0x%h", ob_tdata);
                 if(saw_data_sot) begin
                     for(i = 0; i < 8; i += 1) begin
                         if (ob_tstrb[i] == 1'b1) begin
@@ -396,6 +396,7 @@ module zipline_tb;
 
         $display ("OUTBOUND_INFO:  @time:%-d Exiting OUTBOUND thread...", $time );
         $display ("compressed_length=%d", compressed_length);
+        $display ("time=%d", $time);
         $finish();
 
     endtask // service_ob_interface
